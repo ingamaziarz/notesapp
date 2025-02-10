@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login</title>
+    <style>
+        body {
+            font-family: "Nimbus Mono PS", sans-serif;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h4>Hello {{ username }}! :) </h4>
+    <button onclick="window.location.href='/logout'"><< Log Out</button>
+    <button onclick="window.location.href='/create'">+ New Note</button>
+
+
+    <h4>Public Notes:</h4>
+    <ul>
+        {% for note in notes_public %}
+            <li>
+                <a href="/note/{{ note[9] }}">{{ note[1] }}</a>
+                {% if note[5] == 1 %}
+                    🔒
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h4>Notes Shared With You:</h4>
+    <ul>
+        {% for note in notes_shared %}
+            <li>
+                <a href="/note/{{ note[9] }}">{{ note[1] }}</a>
+                {% if note[5] == 1 %}
+                    🔒
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

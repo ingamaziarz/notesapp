@@ -1,0 +1,19 @@
+services:
+  web:
+    build: .
+    container_name: flask_app
+    ports:
+      - "8000:8000" 
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_reverse_proxy
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./selfsigned.crt:/etc/ssl/certs/selfsigned.crt:ro
+      - ./selfsigned.key:/etc/ssl/private/selfsigned.key:ro  
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web  
